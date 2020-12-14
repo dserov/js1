@@ -8,10 +8,22 @@
 <script>
     'use strict';
 
-    const randomInteger = (min, max) => Math.floor(Math.random() * (max - min) + min);
+    let answer = +prompt('Введите сумму для зачисления (копейки - 2 знака)', '0.00');
+    if (answer === 0 || isNaN(answer)) {
+        alert('Вам ничего не зачислено!');
+    } else {
+        try {
+            alert('Вам зачислено ' + numberToString(answer));
+        } catch (e) {
+            alert('Ошибка - ' + e.message);
+        }
+    }
 
-    let randomNumber = randomInteger(0, 1000000) + '.' + randomInteger(0, 99);
-    console.log(randomNumber, numberToString(randomNumber));
+    // const randomInteger = (min, max) => Math.floor(Math.random() * (max - min) + min);
+
+    // let randomNumber = randomInteger(0, 1000000) + '.' + randomInteger(0, 99);
+    // console.log(randomNumber, numberToString(randomNumber));
+
 
     /**
      * Возвращает сумму прописью
