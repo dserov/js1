@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    'use strict';
+
+    const randomInteger = (min, max) => Math.floor(Math.random() * (max - min) + min);
+
+    let randomNumber = randomInteger(0, 1000000) + '.' + randomInteger(0, 99);
+    console.log(randomNumber, numberToString(randomNumber));
+
+    /**
+     * Возвращает сумму прописью
+     * @param number
+     * @param numberParts
+     */
+    function numberToString(number = 0.0, numberParts = []) {
+        let nul = 'ноль';
+        let dozens = [
+            ['', 'один', 'два', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять'],
+            ['', 'одна', 'две', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять'],
+        ];
+        let namesFrom10To20 = ['десять', 'одиннадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать', 'шестнадцать', 'семнадцать', 'восемнадцать', 'девятнадцать'];
+        dozens[2] = 'двадцать';
+        dozens[3] = 'тридцать';
+        dozens[4] = 'сорок';
+        dozens[5] = 'пятьдесят';
+        dozens[6] = 'шестьдесят';
+        dozens[7] = 'семьдесят';
+        dozens[8] = 'восемьдесят';
+        dozens[9] = 'девяносто';
+        let hundred = ['', 'сто', 'двести', 'триста', 'четыреста', 'пятьсот', 'шестьсот', 'семьсот', 'восемьсот', 'девятьсот'];
+        let unit = [ // Units
+            ['копейка', 'копейки', 'копеек', 1],
+            ['рубль', 'рубля', 'рублей', 0],
+            ['тысяча', 'тысячи', 'тысяч', 1],
+            ['миллион', 'миллиона', 'миллионов', 0],
+            ['миллиард', 'милиарда', 'миллиардов', 0],
+        ];
+        //
+        number = String(number);
+        number = parseFloat(number);
+        number = String(number.toFixed(2));
+
+        let [rub, kop] = number.split('.');
+        let out = [];
+        if (parseInt(rub) > 0) {
+            let triads = number.split(/(\d{3})/).filter(item => item.length);
+            for (let index in triads) { // by 3 symbols
+                let triada = triads[index];
+                if (!parseInt(triada)) continue;
+                index = unit.length - index - 1; // unit key
+                let gender = unit[index][3];
+                let [firstNum, secondNum, thirdNum] = triada.split('').map(x => +x);
+                // mega-logic
+                out.push(hundred[firstNum]); // # 1xx-9xx
+                if (secondNum > 1) {
+                    out.push(dozens[secondNum] + ' ' + dozens[gender][thirdNum]); // # 20-99
+                } else {
+                    out.push(secondNum > 0 ? namesFrom10To20[thirdNum] : dozens[gender][thirdNum]); // # 10-19 | 1-9
+                }
+                // units without rub & kop
+                if (index > 1) {
+                    out.push(
+                        morph(triada, unit[index][0], unit[index][1], unit[index][2])
+                    );
+                }
+            } //foreach
+        } else {
+            out.push(nul);
+        }
+        let rubliStroka = morph(parseInt(rub), unit[1][0], unit[1][1], unit[1][2]);
+        out.push(rubliStroka); // rub
+        out.push(kop);
+        let kopStroka = morph(kop, unit[0][0], unit[0][1], unit[0][2]);
+        out.push(kopStroka); // kop
+        return out.join(' ');
+    }
+
+    /**
+     * Склонение словоформ
+     *
+     * @param triada
+     * @param padegI именительный
+     * @param padegR родительный
+     * @param padegV винительный
+     * @return {*}
+     */
+    function morph(triada, padegI, padegR, padegV) {
+        triada = Math.abs(parseInt(triada)) % 100;
+        if (triada > 10 && triada < 20) return padegV;
+        triada = triada % 10;
+        if (triada > 1 && triada < 5) return padegR;
+        if (triada === 1) return padegI;
+        return padegV;
+    }
+
+</script>
+</body>
+</html>

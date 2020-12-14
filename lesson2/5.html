@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    'use strict';
+    const operationAdd = (a, b) => a + b;
+    const operationSub = (a, b) => a - b;
+    const operationMul = (a, b) => a * b;
+    const operationDiv = (a, b) => { if (b == 0) throw new Error('Деление на 0!'); return a / b; };
+
+    function mathOperation(arg1, arg2, operation) {
+        switch (operation) {
+            case '+':
+                return operationAdd(arg1, arg2);
+            case '-':
+                return operationSub(arg1, arg2);
+            case '*':
+                return operationMul(arg1, arg2);
+            case '/':
+                return operationDiv(arg1, arg2);
+            default:
+                throw new Error('Передан неизвестный оператор');
+        }
+    }
+
+    // test block
+    const getRandomInteger = (min, max) => Math.floor(Math.random() * (max - min) + min);
+    let a = getRandomInteger(-10, 10);
+    let b = getRandomInteger(-10, 10);
+
+    ['+', '-', '*', '/'].forEach(
+        operation => {
+            console.log(`a = ${a}, b = ${b}; '${operation}' = `, mathOperation(a, b, operation));
+        }
+    );
+</script>
+</body>
+</html>
