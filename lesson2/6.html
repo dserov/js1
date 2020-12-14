@@ -42,14 +42,18 @@
             ['миллиард', 'милиарда', 'миллиардов', 0],
         ];
         //
-        number = String(number);
-        number = parseFloat(number);
-        number = String(number.toFixed(2));
 
-        let [rub, kop] = number.split('.');
+        let formatNumber = String(number);
+        formatNumber = parseFloat(formatNumber);
+        formatNumber = String(formatNumber.toFixed(2)).padStart(15, '0');
+
+        // проверим, что можем обработать такое число
+        if (parseFloat(formatNumber) !== parseFloat(number)) throw new Error('Переданное число невозможно корректно обработать!');
+
+        let [rub, kop] = formatNumber.split('.');
         let out = [];
         if (parseInt(rub) > 0) {
-            let triads = number.split(/(\d{3})/).filter(item => item.length);
+            let triads = rub.split(/(\d{3})/).filter(item => item.length);
             for (let index in triads) { // by 3 symbols
                 let triada = triads[index];
                 if (!parseInt(triada)) continue;
