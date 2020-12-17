@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    'use strict';
+    const getRandomInteger = (min, max) => Math.floor(Math.random() * (max - min) + min);
+    let a = getRandomInteger(-10, 10);
+    let b = getRandomInteger(-10, 10);
+    if (a >= 0 && b >= 0) {
+        console.log(`a = ${a}, b = ${b}; a - b = ${a - b}`)
+    } else if (a < 0 && b < 0) {
+        console.log(`a = ${a}, b = ${b}; a * b = ${a * b}`)
+    } else {
+        console.log(`a = ${a}, b = ${b}; a + b = ${a + b}`)
+    }
+</script>
+</body>
+</html>
