@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    'use strict';
+
+    for(let i = 0; i <= 10; i++) {
+        console.log( i + ' - это ' + checkNumber(i));
+    }
+
+    /**
+     *
+     * @param number
+     */
+    function checkNumber(number) {
+        if (number === 0) return 'ноль';
+        return ( number % 2 ? 'не' : '' ) + 'четное число';
+    }
+</script>
+</body>
+</html>

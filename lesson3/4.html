@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    'use strict';
+
+    const products = [
+        {
+            id: 3,
+            price: 127,
+            photos: [
+                "1.jpg",
+                "2.jpg",
+            ]
+        },
+        {
+            id: 5,
+            price: 499,
+            photos: []
+        },
+        {
+            id: 10,
+            price: 26,
+            photos: [
+                "3.jpg"
+            ]
+        },
+        {
+            id: 8,
+            price: 78,
+            photos: ''
+        },
+    ];
+
+    // товары с фото. Кроме существования свойства, проверим его тип(вдруг оно строка?) и наличие в нем элементов
+    const productsWithPhotos = products.filter(
+        item => item.hasOwnProperty('photos') && item.photos instanceof Array && item.photos.length
+    );
+    console.dirxml(productsWithPhotos);
+
+
+    /**
+     *  отсортируем по цене
+     */
+
+    // ВАРИАНТ 1, продемонстрируем что-то из php7
+    // const productsSortedByPriceAsc1 = products.sort(
+    //     (itemA, itemB) => itemA.price <=> itemB.price
+    // );
+
+    // ВАРИАНТ 2
+    const productsSortedByPriceAsc2 = products.sort(
+        (itemA, itemB) => {
+            let compareResult = itemA.price - itemB.price;
+            return Math.min(1, Math.max(-1, compareResult)); // "притянем" в диапазон [-1;1]
+        }
+    );
+    console.dirxml(productsSortedByPriceAsc2);
+
+    // ВАРИАНТ 3
+    const productsSortedByPriceAsc3 = products.sort(
+        (itemA, itemB) => {
+            let compareResult = itemA.price - itemB.price;
+            if (compareResult === 0) return 0;
+            if (compareResult > 0) return 1;
+            return -1;
+        }
+    );
+    console.dirxml(productsSortedByPriceAsc3);
+
+</script>
+</body>
+</html>
