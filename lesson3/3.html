@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    'use strict';
+
+    const products = [
+        {
+            id: 3,
+            price: 200,
+        },
+        {
+            id: 4,
+            price: 900,
+        },
+        {
+            id: 1,
+            price: 1000,
+        },
+    ];
+
+    // непонятно, новый массив создать или применить скидки к этому?
+
+    // новый массив со скидками
+    const productsWithDiscount = products.map(
+        item => Object.assign({}, item, {price: item.price * (100 - 15) / 100})
+    );
+    console.dirxml(productsWithDiscount);
+
+    // применим скидку к элементам исходного массива
+    products.forEach(
+        item => item.price *= (100 - 15) / 100
+    );
+    console.dirxml(products);
+
+</script>
+</body>
+</html>
