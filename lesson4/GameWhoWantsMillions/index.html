@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Кто хочет стать миллионером?</title>
+</head>
+<body onload="game.init()">
+<h1>Кто хочет стать миллионером?</h1>
+<h2>
+    <span id="question">Как настроение?</span>
+</h2>
+<hr>
+<div>
+    <div id="answers_list">
+        <label><input type="radio" name="answer" value="0"> Супер</label>
+        <label><input type="radio" name="answer" value="1"> Отлично</label>
+        <label><input type="radio" name="answer" value="2"> Замечательно</label>
+    </div>
+    <br>
+    <button type="button" id="btn_next_question" style="display: none">Дальше</button>
+    <button type="button" id="btn_start_game">Новая игра</button>
+    <button type="button" id="btn_stop_game" style="display: none">Стоп игра</button>
+</div>
+<hr>
+<h2 id="score"></h2>
+<script src="config.js"></script>
+<script src="renderer.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
