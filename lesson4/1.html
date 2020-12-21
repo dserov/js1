@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    'use strict';
+
+    let askNum = +prompt("Ваше число в диапазоне [0:999]");
+
+    alert(
+        JSON.stringify(
+            parseNumberToObject(askNum)
+        )
+    );
+
+    /**
+     *
+     * @param integer askNum
+     * @return {{}}
+     */
+    function parseNumberToObject(askNum) {
+        if (isNaN(askNum) || !Number.isInteger(askNum)) {
+            return {}
+        }
+        if (askNum < 0 || askNum > 999) {
+            return {}
+        }
+
+        // поделить можно 2-мя путями, как строку и как число.
+        // вариант 1, как строку
+        // return parseNumberAsString(askNum);
+
+        return parseNumberAsNumber(askNum);
+    }
+
+
+    function parseNumberAsNumber(askNum) {
+        let hungreds = Math.floor(askNum / 100);
+        askNum -= hungreds * 100; // вычтем сотни
+        let tens = Math.floor(askNum / 10);
+        askNum -= tens * 10; // вычтем десятки
+        return {
+            hungreds: hungreds,
+            tens: tens,
+            units: askNum
+        }
+    }
+
+    /**
+     * Парсим число в объект через преобразование в строку
+     *
+     * @param askNum
+     * @return {{units: number, tens: number, hundreds: number}}
+     */
+    function parseNumberAsString(askNum) {
+        let value = askNum.toString().padStart(3, '0'); // сделаем строкой и в длину в 3 символа
+        return {
+            units: parseInt(value.slice(2, 3)),
+            tens: parseInt(value.slice(1, 2)),
+            hundreds: parseInt(value.slice(0, 1))
+        }
+    }
+</script>
+</body>
+</html>
