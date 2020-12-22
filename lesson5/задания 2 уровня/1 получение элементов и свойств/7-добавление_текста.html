@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="#">ссылка</a>
+    <a href="#"></a>
+    <a href="#">ссылка</a>
+    <a href="#"></a>
+
+    <!-- Задание.
+    1. Получите все ссылки.
+    2. Проверьте, есть ли в ссылке текст "ссылка", и если нет, то добавьте. -->
+
+    <script>
+        'use strict';
+        let elementList = document.querySelectorAll('a');
+        let wantedText = 'ссылка';
+
+        Array.from(elementList).filter( item => !isHaveText(item) ).map( item => item.textContent = wantedText);
+
+        function isHaveText(element) {
+            return element.textContent === wantedText;
+        }
+
+    </script>
+</body>
+</html>

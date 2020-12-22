@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea></textarea>
+
+    <!-- Задание. Сделайте, чтобы при наведении на textarea в консоли
+    появлялось сообщение: "вы навели на textarea" -->
+
+    <script>
+        'use strict';
+        document.querySelector('textarea').addEventListener('mouseover', () => console.log('вы навели на textarea'));
+        document.querySelector('textarea').addEventListener('mouseleave', () => console.log('вы покинули textarea'));
+    </script>
+</body>
+</html>
