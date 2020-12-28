@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<img src="https://placeimg.com/100/100/animals" alt="">
+<img src="https://placeimg.com/100/100/arch" alt="">
+<img src="https://placeimg.com/100/100/people" alt="">
+
+<!-- Задание.
+1. Сохраните в переменную коллекцию с картинками.
+2. Пробегитесь по этой коллекции с помощью цикла или forEach
+и выведите каждую картинку в консоль. -->
+<script>
+    'use strict';
+    let images = document.images;
+    for (let img of images) {
+        console.log(img);
+    }
+
+    // или
+    let images2 = Array.from(document.images);
+    images2.forEach(img => console.log(img));
+</script>
+</body>
+</html>
