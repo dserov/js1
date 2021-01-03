@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            border-style: solid;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <input id="first" type="text"><br>
+        <br>
+        <input id="second" type="text"><br>
+        <br>
+        <button>Отправить</button>
+    </form>
+
+    <!-- 
+        Задание. Вам нужно проверять пусто ли в input'ах при отправке формы.
+        Если в инпуте пусто делаете ему красную рамку. Если хотя бы в одном
+        инпуте пусто форма не должна отправляться.
+        1. сохраните в переменную formEl ссылку на форму
+        2. сохраните в переменную ссылку на input#first
+        3. сохраните в переменную ссылку на input#second
+        4. на formEl назначьте обработку события отправки формы (submit),
+        у функции-обработчика объявите параметр event.
+            4.1 в функции-обработчике вы проверяете пусты ли input'ы, для этого
+            читайте у них свойство value
+            4.2 если input пустой тогда вы обращаетесь к его style.borderColor
+            и делаете его равным red
+            4.3 чтобы остановить отправку формы используйте event.preventDefault()
+     -->
+
+    <script>
+        'use strict';
+
+        const formEl = document.forms[0];
+        const formInputs = document.querySelectorAll('input');
+
+        formEl.addEventListener('submit', event => {
+            let validInputs = true;
+
+            formInputs.forEach(input => {
+                const validInput = isValidInput(input);
+                input.style.borderColor = validInput ? 'inherit' : 'red';
+                validInputs = validInputs && validInput;
+            });
+
+            if (!validInputs) {
+                event.preventDefault();
+            }
+        });
+
+        function isValidInput(input) {
+            return input.value.length > 0;
+        }
+    </script>
+</body>
+</html>

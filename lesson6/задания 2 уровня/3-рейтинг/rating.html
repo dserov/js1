@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <style>
+        i {
+            font-size: 50px;
+        }
+        .golden {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+    <i id="first" class="fas fa-star"></i>
+    <i id="second" class="fas fa-star"></i>
+    <i id="third" class="fas fa-star"></i>
+    <i id="fourth" class="fas fa-star"></i>
+    <i id="fifth" class="fas fa-star"></i>
+
+    <!-- Задание. Используя заготовку, сделайте чтобы при наведении на вторую звезду
+    подсвечивались первая и вторая звезды. При наведени на третью звезду подсвечивались
+    первая, вторая и третья звезды, и т.д. 
+    mouseover - это событие срабатывает когда мы наводим на элемент.
+    mouseout - это событие срабатывает когда мы перестаем наводить на элемент.
+	Вы можете пойти более продвинутым путем, и получать предыдущий элемент 
+	например с помощью https://mzl.la/3a4SPlR
+    -->
+
+    <script>
+        'use strict';
+        const starList = document.querySelectorAll('.fa-star');
+        const starArray = Array.from(starList);
+
+        const goldenClass = 'golden';
+        document.addEventListener('mouseover', function(event) {
+            if (!starArray.includes(event.target)) {
+                return;
+            }
+            const list = getPreviousSiblingStars(event.target);
+            list.forEach(el => el.classList.add(goldenClass));
+        });
+
+        document.addEventListener('mouseout', function() {
+            if (!starArray.includes(event.target)) {
+                return;
+            }
+            const list = getPreviousSiblingStars(event.target);
+            list.forEach(el => el.classList.remove(goldenClass));
+        });
+
+        function getPreviousSiblingStars(element) {
+            const list = [];
+            while (element !== null && element !== undefined) {
+                if (element.nodeType === Node.ELEMENT_NODE) {
+                    list.push(element);
+                }
+                element = element.previousSibling;
+            }
+            return list;
+        }
+    </script>
+</body>
+</html>
