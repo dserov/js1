@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div></div>
+
+    <!-- 
+    Задание.
+    Нужно имитировать заполнение прогресс-бара в div.
+    -->
+
+    <script>
+        'use strict';
+        let div = document.querySelector('div');
+
+        /**
+         * @param {number} percent величина процента от 0 до 100.
+         */
+        function changeProgress(percent) {
+            div.style.background = `linear-gradient(90deg, rgba(38,255,162,1) ${percent}%, rgba(255,255,255,1) ${percent}%)`;
+        }
+
+        /* 
+        Вам нужно в цикле for создать отложенные вызовы с помощью setTimeout. Т.е. в цикле должны
+        быть вызовы функции setTimeout.
+        1. В условии цикла должно быть i <= 100, т.к. именно значение счетчика будем
+        передавать в changeProgress, а там процент не может превышать 100.
+        2. В setTimeout вторым параметром надо передавать задержку, используйте счетчик цикла,
+        можете также добавить какой-нибудь коэффициент, чтобы подобрать желаемую скорость
+        заполнения прогресс-бара.
+        */
+
+        /**
+         * Вариант 1: Запланировать сразу сотню вызовов? Почему бы и нет!
+         */
+        const DELAY_COEFF = 10;
+        for (let i = 0; i <= 100; i++ ) {
+            setTimeout(changeProgress, DELAY_COEFF * i, i);
+        }
+
+
+        /**
+         * Вариант 2
+         */
+        let currentValue = 0;
+
+        // oneMoreStep(currentValue);
+
+        // Чтобы понять рекурсию, надо понять рекурсию :)
+        function oneMoreStep(currentValue) {
+            if (currentValue > 100) {
+                return;
+            }
+
+            changeProgress(currentValue++);
+
+            currentValue++;
+            setTimeout(oneMoreStep, 20, currentValue);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <a href="https://picsum.photos/200/300" target="_blank">ссылка</a> -->
+
+    <!-- 
+    Задание.
+    С помощью insertAdjacentHTML добавьте в body ссылку по примеру из комментария выше.
+    При создании разметки используйте шаблонный литерал. Данные для ссылки ниже.
+    -->
+
+    <script>
+        let url = "https://picsum.photos/200/300";
+        let targetAttr = "_blank";
+        let linkText = "ссылка";
+
+        document.body.insertAdjacentHTML('beforeend', `<a href="${url}" target="${targetAttr}">${linkText}</a>`);
+    </script>
+</body>
+</html>
